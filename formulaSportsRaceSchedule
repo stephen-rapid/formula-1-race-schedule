@@ -1,0 +1,1166 @@
+<style>
+    html {
+        --black: #000000;
+        --white: #FFFFFF;
+        --darkest-gray: #1B191E;
+        --dark-gray: #323035;
+        --medium-gray: #686677;
+        --light-gray: #908F95;
+        --lightest-gray: #F5F6F7;
+        --primary: rgba(252, 35, 28, 1);
+        --primary-accent: rgba(252, 35, 28, .32);
+    }
+
+    :root {
+        --root-bg: var(--black);
+        --root-color: var(--light-gray);
+        --heading-text-color: var(--white);
+        --component-bg: var(--darkest-gray);
+        --accent: var(--dark-gray);
+    }
+    :root.theme--dark {
+        --root-bg: var(--lightest-gray);
+        --root-color: var(--dark-gray);
+        --heading-text-color: var(--black);
+        --component-bg: var(--white);
+        --accent: var(--light-gray);
+    }
+
+    html {
+        font-size: 62.5%;
+        box-sizing: border-box;
+    }
+
+    *, *:before, *:after {
+        box-sizing: inherit;
+    }
+
+    html, body {
+        width: 100%;
+        height: 100%;
+    }
+
+    body {
+        background: var(--root-bg);
+        color: var(--root-color);
+        font-size: 1.6rem;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Helvetica", sans-serif;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        color: var(--heading-text-color);
+        font-weight: 700;
+        line-height: 1.2;
+        margin-top: 0;
+    }
+
+    h1 {
+        letter-spacing: 0;
+        margin-bottom: 1.6rem;
+        font-size: 70px;
+    }
+    @media screen and (max-width: 768px) {
+        h1 {
+            font-size: 40px;
+        }
+    }
+
+    h2 {
+        letter-spacing: 0;
+        margin-bottom: 1.6rem;
+        font-size: 40px;
+    }
+    @media screen and (max-width: 768px) {
+        h2 {
+            font-size: 32px;
+        }
+    }
+
+    h3 {
+        letter-spacing: 0;
+        margin-bottom: 1.6rem;
+        font-size: 28px;
+    }
+    @media screen and (max-width: 768px) {
+        h3 {
+            font-size: 26px;
+        }
+    }
+
+    h4 {
+        letter-spacing: 0;
+        margin-bottom: 1.6rem;
+        font-size: 24px;
+    }
+    @media screen and (max-width: 768px) {
+        h4 {
+            font-size: 22px;
+        }
+    }
+
+    h5 {
+        letter-spacing: 0;
+        margin-bottom: 1.6rem;
+        font-size: 16px;
+    }
+    @media screen and (max-width: 768px) {
+        h5 {
+            font-size: 18px;
+        }
+    }
+
+    h6 {
+        letter-spacing: 0;
+        margin-bottom: 1.6rem;
+        font-size: 14px;
+    }
+    @media screen and (max-width: 768px) {
+        h6 {
+            font-size: 16px;
+        }
+    }
+
+    .paragraph--lead {
+        font-size: 20px;
+    }
+    @media screen and (max-width: 768px) {
+        .paragraph--lead {
+            font-size: 18px;
+        }
+    }
+    .paragraph--small {
+        font-size: 14px;
+    }
+
+    small {
+        font-size: 14px;
+    }
+
+    .small--caps {
+        font-size: 12px;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+    }
+
+    a {
+        color: var(--heading-text-color);
+    }
+    a:hover, a:focus {
+        color: var(--primary);
+    }
+
+    .l-wrapper {
+        max-width: 600px;
+        margin: 16px auto;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .c-list {
+        margin: 0;
+        padding: 0 0 32px;
+        list-style-type: none;
+        width: 100%;
+    }
+
+    .c-race {
+        margin-bottom: 16px;
+        display: flex;
+        background: var(--component-bg);
+        padding: 16px;
+        border-radius: 0.8rem;
+        box-shadow: 0px 5px 12px -2px rgba(0, 0, 0, 0.1), 0px 12px 25px -4px rgba(0, 0, 0, 0.1);
+        position: relative;
+        transition: all 240ms ease-out 0s;
+    }
+    .c-race--hidden {
+        display: none !important;
+    }
+    .c-race__round {
+        width: 32px;
+        height: 32px;
+        text-align: center;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--root-bg);
+        border-radius: 50%;
+        font-size: 16px;
+        margin-right: 16px;
+        position: relative;
+    }
+    .c-race__round:after {
+        content: "Race";
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 700;
+        position: absolute;
+        bottom: -32px;
+        left: -2px;
+        opacity: 0.32;
+        transform: rotate(-90deg);
+    }
+    .c-race__title {
+        margin-bottom: 8px;
+    }
+    .c-race__date {
+        margin-bottom: 8px;
+    }
+    .c-race--inactive:after {
+        position: absolute;
+        content: "Ended";
+        right: 8px;
+        bottom: 8px;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        background: var(--root-bg);
+        padding: 8px;
+        border-radius: 0.5rem;
+    }
+
+    .c-tab-bar {
+        margin: 0 0 16px;
+        padding: 0;
+        list-style-type: none;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+    .c-tab-bar__item {
+        margin-left: 8px;
+        margin-right: 8px;
+        background: var(--component-bg);
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        padding: 8px 16px;
+        font-size: 12px;
+        border-radius: 999px;
+        text-align: center;
+        min-width: 100px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        cursor: pointer;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: all 120ms ease-out 0s;
+    }
+    .c-tab-bar__item--active {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: var(--white);
+    }
+    .c-tab-bar__item:hover {
+        opacity: 0.8;
+        box-shadow: 0px 3px 6px -1px rgba(0, 0, 0, 0.1), 0px 5px 12px -2px rgba(0, 0, 0, 0.1);
+    }
+    .c-tab-bar__item:active {
+        box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.12), inset 0px 0px 2px rgba(0, 0, 0, 0.24);
+        transform: scale(0.97);
+    }
+
+    .c-empty-state {
+        text-align: center;
+        padding: 32px 16px;
+        width: 100%;
+        max-width: 450px;
+        margin: auto;
+    }
+    .c-empty-state__hero {
+        width: 200px;
+        margin-bottom: 16px;
+    }
+
+    .c-latest {
+        position: relative;
+    }
+    .c-latest__background {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        filter: grayscale(1);
+        opacity: 0.12;
+        user-select: none;
+        z-index: 1;
+    }
+    .c-latest__item {
+        background: var(--primary);
+        color: var(--white);
+        position: relative;
+        margin-bottom: 32px;
+    }
+    .c-latest__item:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.24));
+    }
+    .c-latest__item .c-race__title {
+        color: inherit;
+    }
+    .c-latest__item .c-race__round {
+        color: var(--heading-text-color);
+    }
+    .c-latest__item .c-race__content {
+        text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2), 0px 2px 4px rgba(0, 0, 0, 0.25);
+        position: relative;
+        z-index: 10;
+    }
+
+    .c-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 32px;
+        margin-bottom: 32px;
+    }
+
+    .c-field {
+        display: block;
+        margin-bottom: 32px;
+        position: relative;
+    }
+    .c-field:after {
+        width: 10px;
+        height: 10px;
+        border-top: 3px solid;
+        border-right: 3px solid;
+        content: "";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%) rotate(135deg);
+        right: 16px;
+    }
+    .c-field__label {
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-right: 8px;
+        position: absolute;
+        top: 50%;
+        left: 16px;
+        transform: translateY(-50%);
+    }
+    .c-field__input {
+        font-family: inherit;
+        padding: 16px 16px 16px 96px;
+        background: transparent;
+        color: inherit;
+        width: 100%;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-color: currentColor;
+    }
+    .c-field__input:focus, .c-field__input:active {
+        border-color: var(--primary);
+        color: var(--heading-text-color);
+        outline: 0;
+    }
+
+    .c-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    .c-logo__icon {
+        margin-right: 16px;
+        display: block;
+    }
+    .c-logo__wordmark {
+        color: var(--heading-text-color);
+        font-size: 16px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+    .c-logo__wordmark--subtitle {
+        color: var(--medium-gray);
+        margin-left: 8px;
+        font-weight: 400;
+    }
+
+    .c-footer {
+        padding-bottom: 16px;
+    }
+    .c-footer__logo {
+        width: 32px;
+        height: 32px;
+        color: var(--root-color);
+        transition: all 120ms ease-out 0s;
+    }
+    .c-footer__logo:hover, .c-footer__logo:focus {
+        color: #00d1b2;
+        transform: scale(1.05);
+    }
+
+    .c-button {
+        font-family: inherit;
+        border-radius: 0.8rem;
+        border: 0;
+        display: inline-flex;
+        align-items: center;
+        padding: 8px;
+        cursor: pointer;
+        color: inherit;
+        background: var(--component-bg);
+        box-shadow: 0px 3px 6px -1px rgba(0, 0, 0, 0.1), 0px 5px 12px -2px rgba(0, 0, 0, 0.1), 0px 12px 25px -4px rgba(0, 0, 0, 0.1);
+        transition: all 120ms ease-out 0s;
+    }
+    .c-button:focus, .c-button:active {
+        outline: 0;
+    }
+    .c-button:hover {
+        opacity: 0.8;
+    }
+    .c-button:active {
+        box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.12), inset 0px 0px 2px rgba(0, 0, 0, 0.24);
+        transform: scale(0.97);
+    }
+
+    .c-loader {
+        width: 104px;
+        height: 104px;
+        transform-origin: center;
+        -webkit-animation: rotate 2s linear infinite;
+        animation: rotate 2s linear infinite;
+        display: block;
+        text-align: center;
+        margin: 64px auto 16px;
+    }
+    .c-loader circle {
+        stroke-width: 2;
+        fill: transparent;
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+        stroke-linecap: round;
+        -webkit-animation: dash 1.5s ease-in-out infinite;
+        animation: dash 1.5s ease-in-out infinite;
+    }
+
+    @-webkit-keyframes rotate {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes rotate {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    @-webkit-keyframes dash {
+        0% {
+            stroke-dasharray: 1, 200;
+            stroke-dashoffset: 0;
+            stroke: var(--heading-text-color);
+        }
+        50% {
+            stroke-dasharray: 90, 200;
+            stroke-dashoffset: -35px;
+            stroke: var(--primary);
+        }
+        100% {
+            stroke-dashoffset: -125px;
+            stroke: var(--heading-text-color);
+        }
+    }
+    @keyframes dash {
+        0% {
+            stroke-dasharray: 1, 200;
+            stroke-dashoffset: 0;
+            stroke: var(--heading-text-color);
+        }
+        50% {
+            stroke-dasharray: 90, 200;
+            stroke-dashoffset: -35px;
+            stroke: var(--primary);
+        }
+        100% {
+            stroke-dashoffset: -125px;
+            stroke: var(--heading-text-color);
+        }
+    }
+    .u-color--dark-gray {
+        color: var(--dark-gray) !important;
+    }
+
+    .u-bg--dark-gray {
+        background: var(--dark-gray) !important;
+    }
+
+    .u-color--medium-gray {
+        color: var(--medium-gray) !important;
+    }
+
+    .u-bg--medium-gray {
+        background: var(--medium-gray) !important;
+    }
+
+    .u-color--light-gray {
+        color: var(--light-gray) !important;
+    }
+
+    .u-bg--light-gray {
+        background: var(--light-gray) !important;
+    }
+
+    .u-color--black {
+        color: var(--black) !important;
+    }
+
+    .u-bg--black {
+        background: var(--black) !important;
+    }
+
+    .u-color--white {
+        color: var(--white) !important;
+    }
+
+    .u-bg--white {
+        background: var(--white) !important;
+    }
+
+    .u-text--center {
+        text-align: center !important;
+    }
+
+    .u-text--left {
+        text-align: left !important;
+    }
+
+    .u-text--right {
+        text-align: right !important;
+    }
+
+    .u-padding-l--xxs {
+        padding-left: 2px !important;
+    }
+
+    .u-margin-l--xxs {
+        margin-left: 2px !important;
+    }
+
+    .u-padding-r--xxs {
+        padding-right: 2px !important;
+    }
+
+    .u-margin-r--xxs {
+        margin-right: 2px !important;
+    }
+
+    .u-padding-t--xxs {
+        padding-top: 2px !important;
+    }
+
+    .u-margin-t--xxs {
+        margin-top: 2px !important;
+    }
+
+    .u-padding-b--xxs {
+        padding-bottom: 2px !important;
+    }
+
+    .u-margin-b--xxs {
+        margin-bottom: 2px !important;
+    }
+
+    .u-padding-l--xs {
+        padding-left: 4px !important;
+    }
+
+    .u-margin-l--xs {
+        margin-left: 4px !important;
+    }
+
+    .u-padding-r--xs {
+        padding-right: 4px !important;
+    }
+
+    .u-margin-r--xs {
+        margin-right: 4px !important;
+    }
+
+    .u-padding-t--xs {
+        padding-top: 4px !important;
+    }
+
+    .u-margin-t--xs {
+        margin-top: 4px !important;
+    }
+
+    .u-padding-b--xs {
+        padding-bottom: 4px !important;
+    }
+
+    .u-margin-b--xs {
+        margin-bottom: 4px !important;
+    }
+
+    .u-padding-l--sm {
+        padding-left: 8px !important;
+    }
+
+    .u-margin-l--sm {
+        margin-left: 8px !important;
+    }
+
+    .u-padding-r--sm {
+        padding-right: 8px !important;
+    }
+
+    .u-margin-r--sm {
+        margin-right: 8px !important;
+    }
+
+    .u-padding-t--sm {
+        padding-top: 8px !important;
+    }
+
+    .u-margin-t--sm {
+        margin-top: 8px !important;
+    }
+
+    .u-padding-b--sm {
+        padding-bottom: 8px !important;
+    }
+
+    .u-margin-b--sm {
+        margin-bottom: 8px !important;
+    }
+
+    .u-padding-l--md {
+        padding-left: 16px !important;
+    }
+
+    .u-margin-l--md {
+        margin-left: 16px !important;
+    }
+
+    .u-padding-r--md {
+        padding-right: 16px !important;
+    }
+
+    .u-margin-r--md {
+        margin-right: 16px !important;
+    }
+
+    .u-padding-t--md {
+        padding-top: 16px !important;
+    }
+
+    .u-margin-t--md {
+        margin-top: 16px !important;
+    }
+
+    .u-padding-b--md {
+        padding-bottom: 16px !important;
+    }
+
+    .u-margin-b--md {
+        margin-bottom: 16px !important;
+    }
+
+    .u-padding-l--lg {
+        padding-left: 32px !important;
+    }
+
+    .u-margin-l--lg {
+        margin-left: 32px !important;
+    }
+
+    .u-padding-r--lg {
+        padding-right: 32px !important;
+    }
+
+    .u-margin-r--lg {
+        margin-right: 32px !important;
+    }
+
+    .u-padding-t--lg {
+        padding-top: 32px !important;
+    }
+
+    .u-margin-t--lg {
+        margin-top: 32px !important;
+    }
+
+    .u-padding-b--lg {
+        padding-bottom: 32px !important;
+    }
+
+    .u-margin-b--lg {
+        margin-bottom: 32px !important;
+    }
+
+    .u-padding-l--xl {
+        padding-left: 64px !important;
+    }
+
+    .u-margin-l--xl {
+        margin-left: 64px !important;
+    }
+
+    .u-padding-r--xl {
+        padding-right: 64px !important;
+    }
+
+    .u-margin-r--xl {
+        margin-right: 64px !important;
+    }
+
+    .u-padding-t--xl {
+        padding-top: 64px !important;
+    }
+
+    .u-margin-t--xl {
+        margin-top: 64px !important;
+    }
+
+    .u-padding-b--xl {
+        padding-bottom: 64px !important;
+    }
+
+    .u-margin-b--xl {
+        margin-bottom: 64px !important;
+    }
+
+    .u-padding-l--xxl {
+        padding-left: 128px !important;
+    }
+
+    .u-margin-l--xxl {
+        margin-left: 128px !important;
+    }
+
+    .u-padding-r--xxl {
+        padding-right: 128px !important;
+    }
+
+    .u-margin-r--xxl {
+        margin-right: 128px !important;
+    }
+
+    .u-padding-t--xxl {
+        padding-top: 128px !important;
+    }
+
+    .u-margin-t--xxl {
+        margin-top: 128px !important;
+    }
+
+    .u-padding-b--xxl {
+        padding-bottom: 128px !important;
+    }
+
+    .u-margin-b--xxl {
+        margin-bottom: 128px !important;
+    }
+
+    .u-margin-x--auto {
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .u-margin-y--auto {
+        margin-top: auto !important;
+        margin-bottom: auto !important;
+    }
+
+    @-webkit-keyframes fadeUp {
+        from {
+            transform: translateY(16px);
+        }
+        to {
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeUp {
+        from {
+            transform: translateY(16px);
+        }
+        to {
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<script type="text/babel">
+    console.clear();
+
+    const raceinfo_api = "https://ergast.com/api/f1/current.json";
+    const list = document.getElementById('body');
+
+    // Format Date to read Month DD, YYYY
+    const formatDate = (dateEntry) => {
+
+        const monthLabels = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+        ];
+
+        const dateString = `\/Date(${dateEntry})\/`.substr(6);
+        const currentTime = new Date(parseInt(dateString));
+        const month = currentTime.getMonth();
+        const day = ("0" + currentTime.getDate()).slice(-2);
+        const year = currentTime.getFullYear();
+        const date = monthLabels[month] + ' ' + day + ', ' + year;
+        return date;
+    }
+
+    // Empty State
+    const emptyState = (title,content) => {
+        if((list.querySelectorAll('.c-race--hidden').length == list.querySelectorAll('.c-race').length) || list.querySelectorAll('.c-race').length < 1) {
+            const newEmptyState = document.createElement('div');
+            newEmptyState.classList = 'c-empty-state';
+            newEmptyState.innerHTML = `
+		<div class="c-empty-state">
+				<svg class="c-empty-state__hero" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 223 131" fill="none">
+						<g clip-path="url(#clip0)">
+								<path d="M159.871 22.368H222.899L200.775 63.2119H137.747L159.871 22.368Z" fill="var(--component-bg)"></path>
+								<path d="M20.4116 79.9662H78.5617L58.1501 117.649H0L20.4116 79.9662Z" fill="var(--component-bg)"></path>
+								<path d="M27.0326 19.4039H57.8678L47.0442 39.386H16.209L27.0326 19.4039Z" fill="var(--component-bg)"></path>
+								<path d="M145.236 79.9662H166.572L159.083 93.7922H137.747L145.236 79.9662Z" fill="var(--component-bg)"></path>
+								<path d="M103.703 34.4378C87.1442 25.0993 75.0513 30.9358 65.3628 37.9612L91.153 82.6311C92.2487 73.1218 93.4287 68.718 102.415 62.9569C111.402 57.1957 122.749 70.4022 136.328 59.6992C147.191 51.1368 145.423 32.304 143.182 23.9578C132.612 40.3685 120.262 43.7762 103.703 34.4378Z" stroke="var(--heading-text-color)" stroke-width="6" stroke-linejoin="round"></path>
+								<path d="M71.6864 48.9139L107.58 111.083" stroke="var(--heading-text-color)" stroke-width="6" stroke-linecap="round"></path>
+								<circle cx="58.7485" cy="27.1923" r="5.67786" transform="rotate(-30 58.7485 27.1923)" fill="var(--heading-text-color)"></circle>
+						</g>
+						<defs>
+								<clippath id="clip0">
+										<rect width="223" height="131" fill="white"></rect>
+								</clippath>
+						</defs>
+				</svg>
+				<h4 class="c-empty-state__title">${title}</h4>
+				<p>${content}</p>
+		</div>
+		`;
+            list.appendChild(newEmptyState);
+        } else {
+            list.querySelectorAll('.c-empty-state').forEach(item => {
+                item.remove();
+            })
+        }
+    }
+
+    // Hide non-selected list items when clicking their respective tab item
+
+    const allActive = () => {
+        list.querySelectorAll('.c-race.c-race--hidden').forEach(hiddenItem => {
+            hiddenItem.classList.remove('c-race--hidden');
+        })
+    }
+
+    const upcomingActive = () => {
+        allActive();
+        list.querySelectorAll('.c-race.c-race--inactive').forEach(pastItem => {
+            pastItem.classList.add('c-race--hidden');
+        })
+        emptyState('No upcoming races this season', 'All races this season appear to be finished. Tune in next season!');
+    }
+
+    const pastActive = () => {
+        allActive();
+        list.querySelectorAll('.c-race.c-race--active').forEach(upcomingItem => {
+            upcomingItem.classList.add('c-race--hidden');
+        })
+        emptyState('No finished races this season', 'No races have started yet. Tune in to the next upcoming race!');
+    }
+
+    const toggleInactiveStyles = (x) => {
+        if(x == true) {
+            list.querySelectorAll('.c-race.c-race--inactive').forEach(pastItem => {
+                pastItem.style.opacity = '.32';
+                pastItem.style.boxShadow = '0px 2px 2px 0px rgba(0,0,0,.1)';
+            })
+        } else {
+            list.querySelectorAll('.c-race.c-race--inactive').forEach(pastItem => {
+                pastItem.style.opacity = '1';
+                pastItem.style.removeProperty('box-shadow');
+            })
+        }
+    }
+
+    // Function for loading season from ergast api url parameter
+    const renderRaces = (URL) => {
+
+        // Get data from Ergast Developer API http://ergast.com/mrd/
+        $.ajax({
+            type: "GET",
+            url: URL,
+            dataType: "json",
+            cache: false,
+            success: function(data) {
+
+                const dataTarget = data.MRData.RaceTable.Races;
+
+                // List of offsets between race date and current date
+                const raceDateOffsets = [];
+
+                // Find the lowest offset (soonest race)
+                Array.min = function( array ){
+                    return Math.min.apply( Math, array );
+                };
+
+                // Create array of offsets for all future races in the season
+                dataTarget.forEach(race => {
+                    const currentDate = Date.parse(new Date());
+                    const raceDate = Date.parse(race.date);
+                    const closestRaceVal = currentDate - raceDate;
+                    if(closestRaceVal < 0) {
+                        raceDateOffsets.push(closestRaceVal * -1);
+                    }
+                })
+
+                const closestRaceDate = Array.min(raceDateOffsets);
+                // Find local timezone and shorten
+                const zone = new Date().toLocaleTimeString('en-us',{timeZoneName:'short'}).split(' ')[2]
+
+                // Loop through season object to create races
+                dataTarget.forEach(race => {
+                    const newRow = document.createElement('li');
+                    const currentDate = Date.parse(new Date());
+                    const raceDate = Date.parse(race.date);
+                    const closestRaceVal = currentDate - raceDate;
+                    newRow.classList = `c-list__item c-race ${currentDate > raceDate ? 'c-race--inactive' : 'c-race--active'}`;
+
+                    const dateTimeString = moment(race.date + 'T' + race.time);
+                    newRow.style.animationDelay = `calc(${race.round} * 100ms)`;
+
+                    newRow.innerHTML = `
+				<div class="c-race__round">${race.round - 1}</div>
+				<div class="c-race__content">
+				<h4 class="c-race__title">${race.raceName}</h4>
+				<div class="c-race__date">${formatDate(raceDate)} • ${dateTimeString.format('LT')} ${zone}</div>
+				<div class="c-race__track">${race.Circuit.circuitName}</div>
+				</div>
+				`;
+
+                    list.appendChild(newRow)
+
+                    // dynamic background image overlays for next race card
+                    const bgImages = [
+                        'https://images.unsplash.com/photo-1530525555924-ea911cdf2a2c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1778&q=80',
+                        'http://ea80e97cace747c2c244-5483548c70a81fe49af7816b21fff1c8.r64.cf1.rackcdn.com/_800x350_strech_top-center_100/Thank-You-F1.jpg',
+                        'https://images.unsplash.com/photo-1531328418211-f43ca4910bbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2389&q=80',
+                        'https://s3-eu-west-1.amazonaws.com/crash.net/styles/article/s3/field/image/AP-1VJFP92391W11_hires_jpeg_24bit_rgb.jpg?itok=xyMKUKOk',
+                    ];
+
+                    // Get data of next race
+
+                    if(closestRaceDate == closestRaceVal * -1) {
+                        if(raceDateOffsets.length > 0) {
+                            const newTitle = document.createElement('h6');
+                            newTitle.innerHTML = 'Next Race:';
+                            document.querySelector('.c-latest').appendChild(newTitle);
+                        }
+                        const randomBgImage = Math.floor(Math.random() * Math.floor(bgImages.length));
+                        const latestItem = document.createElement('div');
+                        latestItem.classList = 'c-race c-latest__item';
+                        const dateTimeString = moment(race.date + 'T' + race.time);
+                        latestItem.innerHTML = `
+					<div class="c-latest__background" style="background-image:url(${bgImages[randomBgImage]})"></div>
+					<div class="c-race__round">${race.round}</div>
+					<div class="c-race__content">
+					<h4 class="c-race__title">${race.raceName}</h4>
+					<div class="c-race__date">${formatDate(raceDate)} • ${dateTimeString.format('LT')} ${zone}</div>
+					<div class="c-race__track">${race.Circuit.circuitName}</div>
+					</div>
+					`;
+                        document.querySelector('.c-latest').appendChild(latestItem);
+                    }
+                })
+
+                // Auto filter to only upcoming races
+                upcomingActive();
+            }
+        });
+
+    }
+
+    // Run current season
+    renderRaces(raceinfo_api);
+
+    const changeSeason = document.getElementById('changeSeason');
+
+    // Change season on select event
+    changeSeason.addEventListener('change', function(e) {
+        document.querySelector('.c-latest').innerHTML = '';
+        // Create loading state inbetween API call
+        document.getElementById('body').innerHTML = `
+		<svg class="c-loader" viewBox="25 25 50 50" stroke="currentColor">
+			<circle cx="50" cy="50" r="20"></circle>
+		</svg>
+		<h5 class="u-text--center">Loading races for the ${e.target.value} season...</h5>
+	`;
+        const changeURL = `https://ergast.com/api/f1/${e.target.value}.json`;
+        // remove empty state and run API call for season
+        setTimeout(() => {
+            document.getElementById('body').innerHTML = '';
+            renderRaces(changeURL);
+        }, 1000)
+    })
+
+    // list fade animation
+    const fadeList = () => {
+        list.style.transition = 'all 0s';
+        list.style.opacity = 0;
+        setTimeout(() => {
+            list.style.transition = 'all 300ms ease-out 0s';
+            list.style.opacity = 1;
+        }, 220)
+    }
+
+    const tabItems = document.querySelectorAll('.c-tab-bar__item');
+
+    // Add click events and filter to each tab item
+    tabItems.forEach(tab => {
+        tab.addEventListener('click', () => {
+            if(!tab.classList.contains('c-tab-bar__item--active')) {
+                tab.parentNode.querySelector('.c-tab-bar__item--active')
+                    .classList.remove('c-tab-bar__item--active');
+                tab.classList.add('c-tab-bar__item--active');
+
+                fadeList();
+
+                const eventType = tab.dataset.event;
+
+                switch (eventType) {
+                    case 'upcoming':
+                        upcomingActive();
+                        toggleInactiveStyles(false);
+                        break;
+                    case 'past':
+                        pastActive();
+                        toggleInactiveStyles(false);
+                        break;
+                    case 'all':
+                        allActive();
+                        toggleInactiveStyles(true);
+                        break;
+                }
+
+            } else {
+                // Do nothing if clicked tab item is already active
+            }
+        })
+    });
+
+    // dark theming for the true homies
+    // colors controlled by utility css variables bound to root element and class
+
+    const themeButton = document.getElementById('themeChange');
+
+    themeButton.addEventListener('click', () => {
+        if(document.documentElement.classList.contains('theme--dark')) {
+            document.documentElement.classList.remove('theme--dark');
+            themeButton.innerHTML = `
+			<svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<circle cx="12" cy="12" r="5"></circle>
+				<line x1="12" y1="1" x2="12" y2="3"></line>
+				<line x1="12" y1="21" x2="12" y2="23"></line>
+				<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+				<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+				<line x1="1" y1="12" x2="3" y2="12"></line>
+				<line x1="21" y1="12" x2="23" y2="12"></line>
+				<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+				<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+			</svg>
+		`;
+        } else {
+            document.documentElement.classList.add('theme--dark');
+            themeButton.innerHTML = `
+			<svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+		</svg>
+		`;
+        }
+    });
+
+</script>
+
+
+
+
+<div class="l-wrapper">
+    <div class="c-header">
+        <div class="c-logo">
+            <svg class="c-logo__icon" xmlns="http://www.w3.org/2000/svg" width="75" height="19.5" viewBox="0 0 100 26" fill="none">
+                <g>
+                    <path d="M84.4734 0L59.4406 26H74.9879L100.021 0H84.4734Z" fill="var(--primary)"></path>
+                    <path d="M0 25.9991L18.716 6.54561C20.6882 4.43594 23.0546 2.76704 25.6701 1.6413C28.2856 0.515569 31.0949 -0.0432571 33.9257 -0.000891236H82.3173L72.9352 9.7509H36.3849C34.3265 9.72193 32.2839 10.1289 30.3819 10.9469C28.4798 11.7649 26.7582 12.9768 25.322 14.5087L14.2591 25.9991H0Z" fill="var(--primary)"></path>
+                    <path d="M16.7046 26L27.3473 14.9461C28.4191 13.7981 29.7047 12.8889 31.1259 12.2739C32.5471 11.6589 34.0739 11.3509 35.6134 11.3687H71.3371L62.6851 20.4122H38.1828C37.2304 20.3996 36.2855 20.5885 35.4056 20.9674C34.5257 21.3462 33.7292 21.9071 33.0647 22.6159L29.8064 26H16.7046Z" fill="var(--primary)"></path>
+                </g>
+            </svg>
+            <div class="c-logo__wordmark">
+                <div class="c-logo__wordmark">Race Times</div>
+            </div>
+        </div>
+        <button class="c-button" id="themeChange">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-reactid="1166">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+        </button>
+    </div>
+    <div class="c-field">
+        <label class="c-field__label">Season:</label>
+        <select class="c-field__input" id="changeSeason">
+            <option selected="selected" value="2021">2021</option>
+            <option value="2020">2020</option>
+            <option value="2019">2019</option>
+            <option value="2018">2018</option>
+            <option value="2017">2017</option>
+            <option value="2016">2016</option>
+            <option value="2015">2015</option>
+            <option value="2014">2014</option>
+            <option value="2013">2013</option>
+            <option value="2012">2012</option>
+            <option value="2011">2011</option>
+        </select>
+    </div>
+    <div class="c-latest"></div>
+    <ul class="c-tab-bar">
+        <li class="c-tab-bar__item c-tab-bar__item--active" data-event="upcoming">Upcoming</li>
+        <li class="c-tab-bar__item" data-event="past">Past</li>
+        <li class="c-tab-bar__item" data-event="all">All</li>
+    </ul>
+    <ul class="c-list" id="body"></ul>
+</div>
